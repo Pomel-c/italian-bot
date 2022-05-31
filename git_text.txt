@@ -1,0 +1,8 @@
+ git add . 
+ git status
+ git commit -m 'Cambio de ignore venv'
+ git push origin main
+ 
+ git rm --cached nonmbre.txt --> borra archivos en git
+ git clone https://github.com/Pomel-c/italian-bot.git o git@github.com:Pomel-c/italian-bot.git --> descargar todas las dependencias
+ 
