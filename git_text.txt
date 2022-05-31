@@ -1,4 +1,0 @@
- git add . 
- git status
- git commit -m 'Cambio de ignore venv'
- git push origin main
