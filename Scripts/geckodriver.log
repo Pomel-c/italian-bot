@@ -1,0 +1,187 @@
+1651710049573	geckodriver	INFO	Listening on 127.0.0.1:62941
+1651710052620	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "62942" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileGaxi6R"
+1651710052889	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileGaxi6R\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:62942/devtools/browser/5b78d4c9-cc97-486d-9a5b-edda29968c50
+1651710054946	Marionette	INFO	Listening on port 62961
+Read port: 62961
+1651710054984	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1651710254000	Marionette	INFO	Stopped listening on port 62961
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1651710518883	geckodriver	INFO	Listening on 127.0.0.1:63517
+1651710521922	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63518" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileZoXzKU"
+1651710522192	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileZoXzKU\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:63518/devtools/browser/8c88e820-7777-42a5-98aa-94dd8a2434f6
+1651710524155	Marionette	INFO	Listening on port 63537
+Read port: 63537
+1651710524178	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1651710803560	Marionette	INFO	Stopped listening on port 63537
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1651710913163	geckodriver	INFO	Listening on 127.0.0.1:64123
+1651710916214	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "64124" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileS7u9Ea"
+1651710916476	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileS7u9Ea\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:64124/devtools/browser/f8a90120-3fbb-4331-92ab-c87f335bbd70
+1651710918466	Marionette	INFO	Listening on port 64148
+Read port: 64148
+1651710918585	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1651710932591	Marionette	INFO	Stopped listening on port 64148
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1651712877079	geckodriver	INFO	Listening on 127.0.0.1:50748
+1651712880126	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50749" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileeDjD7l"
+1651712880392	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileeDjD7l\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50749/devtools/browser/8e24c79d-ff08-4f8a-b3d4-931d86f0e354
+1651712882292	Marionette	INFO	Listening on port 50775
+Read port: 50775
+1651712882373	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1651712907703	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1651713179369	Marionette	INFO	Stopped listening on port 50775
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1651713278132	geckodriver	INFO	Listening on 127.0.0.1:51242
+1651713281175	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51243" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileqCkZxQ"
+1651713281444	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileqCkZxQ\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51243/devtools/browser/b04cb7c3-3f86-4935-ae51-115f7ecbff17
+1651713283479	Marionette	INFO	Listening on port 51273
+Read port: 51273
+1651713283522	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1651713337614	Marionette	INFO	Stopped listening on port 51271651713339705	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51353" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofilewj2KLO"
+1651713339966	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofilewj2KLO\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51353/devtools/browser/aed7ea89-5bcc-40a0-b6a5-7996c01582d5
+1651713341847	Marionette	INFO	Listening on port 51380
+Read port: 51380
+1651713341945	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1651713433243	Marionette	INFO	Stopped listening on port 51380
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1651713435993	geckodriver	INFO	Listening on 127.0.0.1:51508
+1651713439042	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51509" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileK4Y8sD"
+1651713439307	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileK4Y8sD\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51509/devtools/browser/a2331531-2efc-4f87-8df5-7e44ac0fb08e
+1651713441198	Marionette	INFO	Listening on port 51534
+Read port: 51534
+1651713441291	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1651713457858	geckodriver	INFO	Listening on 127.0.0.1:51580
+1651713460910	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51581" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofilePF7Ivu"
+1651713461198	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofilePF7Ivu\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51581/devtools/browser/e8c864a5-f754-49e9-81eb-ac6b996c0621
+1651713463203	Marionette	INFO	Listening on port 51610
+Read port: 51610
+1651713463261	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://prenotami.esteri.it/Content/js/dataTables.buttons.js, line 43: TypeError: DataTable is undefined
+JavaScript error: https://prenotami.esteri.it/Content/js/buttons.print.js, line 83: TypeError: DataTable is undefined
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1651713595000	Marionette	INFO	Stopped listening on port 51610
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1651787194396	geckodriver	INFO	Listening on 127.0.0.1:63759
+1651787197427	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "63760" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofilerG9V3e"
+1651787197713	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofilerG9V3e\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:63760/devtools/browser/ab87a3eb-24ee-4c5e-bd5d-44450c7382a3
+1651787200005	Marionette	INFO	Listening on port 63788
+Read port: 63788
+1651787200061	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1651787251170	Marionette	INFO	Stopped listening on port 63788
+1652588606108	geckodriver	INFO	Listening on 127.0.0.1:50314
+1652588609158	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "50315" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileabEl5n"
+1652588609466	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileabEl5n\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:50315/devtools/browser/52f64ee4-af11-44c5-985d-dead7ee49f2d
+1652588612941	Marionette	INFO	Listening on port 50337
+Read port: 50337
+1652588612972	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 772))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1652588671720	Marionette	INFO	Stopped listening on port 50337
+1652844156351	geckodriver	INFO	Listening on 127.0.0.1:51534
+1652844159334	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51535" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileofY7l2"
+1652844159657	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofileofY7l2\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51535/devtools/browser/d2f30896-0113-4dc0-bb8c-0214192b35fc
+1652844161676	Marionette	INFO	Listening on port 51565
+Read port: 51565
+1652844161804	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+JavaScript error: resource://gre/modules/AsyncShutdown.jsm, line 575: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1652844276344	Marionette	INFO	Stopped listening on port 51565
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1652844283314	geckodriver	INFO	Listening on 127.0.0.1:51730
+1652844286370	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51731" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofilek3FOUd"
+1652844286668	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofilek3FOUd\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51731/devtools/browser/de4ae877-0700-4fab-806e-dd604e51859c
+1652844288456	Marionette	INFO	Listening on port 51758
+Read port: 51758
+1652844288514	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1652844349606	Marionette	INFO	Stopped listening on port 51751652844352053	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "51848" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofile5CirJ7"
+1652844352349	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\Juan\\AppData\\Local\\Temp\\rust_mozprofile5CirJ7\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://localhost:51848/devtools/browser/ff178b47-3248-46ee-90c2-d212177fda20
+1652844354020	Marionette	INFO	Listening on port 51873
+Read port: 51873
+1652844354074	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://prenotami.esteri.it"
+JavaScript error: resource://gre/modules/LoginManagerParent.jsm, line 136: TypeError: gRecipeManager is null
+1652844394591	Marionette	INFO	Stopped listening on port 51873
+1652844423366	geckodriver	INFO	Listening on 127.0.0.1:51984
