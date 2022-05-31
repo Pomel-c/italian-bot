@@ -8,7 +8,7 @@ def sendoMail(numero, hour):
     
     i = numero
     Sender_Email = "juansarde@gmail.com"
-    Reciever_Email = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com"] 
+    Reciever_Email = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"] 
     Password = 'pxagdiwohcfdglah'
     
     hour = hour
