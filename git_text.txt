@@ -5,4 +5,5 @@
  
  git rm --cached nonmbre.txt --> borra archivos en git
  git clone https://github.com/Pomel-c/italian-bot.git o git@github.com:Pomel-c/italian-bot.git --> descargar todas las dependencias
+ pip install -r requirements.txt 
  
