@@ -1,0 +1,9 @@
+venv
+venv/Lib
+venv/Include
+venv/Scripts
+venv/pyvenv.cfg
+screenshots
+geckodriver.log
+Textos
+git_text.txt
