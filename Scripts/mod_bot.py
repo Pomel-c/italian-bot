@@ -1,8 +1,11 @@
 # ./venv/Scripts/Activate.ps1
 
 import telebot
+import os
 
-bot = telebot.TeleBot("1883687934:AAFpAiI1yP23QPE5AgRSOO2hffGqTJuHGxI")
+API_KEY = os.getenv('API_KEY')
+
+bot = telebot.TeleBot(API_KEY)
 
 id_list = ['Mechu', 'Carmen']
 
@@ -24,8 +27,9 @@ def start(message):
 
 @bot.message_handler(commands=['delete'])
 def start(message):
-	bot.send_message(message.chat.id, 'TODO')
-
+	id_delete = message.chat.id
+	id_list.remove(id_delete)
+	bot.send_message(message.chat.id, f'Fuiste removido de la lista de mensajes \nNueva lista {id_list}')
 
 bot.polling()
 
