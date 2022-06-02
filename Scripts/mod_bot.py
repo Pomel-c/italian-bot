@@ -1,13 +1,11 @@
 # ./venv/Scripts/Activate.ps1
 
 import telebot
-import os
+from var_sv import wrt_nuevo, rde_list, api, wrt_list
 
-API_KEY = os.getenv('API_KEY')
-
+API_KEY = api()
 bot = telebot.TeleBot(API_KEY)
 
-id_list = ['Mechu', 'Carmen']
 
 
 @bot.message_handler(commands=['start'])
@@ -19,46 +17,25 @@ def start(message):
 @bot.message_handler(commands=['add'])
 def start(message):
 	id_nuevo = message.chat.id
-	id_list.append(id_nuevo)
+	wrt_nuevo(id_nuevo)
 
-	bot.send_message(message.chat.id, f'la lista acuatilizada es {id_list}')
+	id_list = rde_list()
+	bot.send_message(message.chat.id, f'la lista actualizada es {id_list}')
 
 
 
 @bot.message_handler(commands=['delete'])
 def start(message):
-	id_delete = message.chat.id
+
+	id_list = rde_list()
+	id_delete = str(message.chat.id)
 	id_list.remove(id_delete)
+	# tengo que reescribir la nueva lista con el id borrado
+	wrt_list(id_list)
 	bot.send_message(message.chat.id, f'Fuiste removido de la lista de mensajes \nNueva lista {id_list}')
+
+
 
 bot.polling()
 
 
-
-
-
-
-
-
-# id_list = [1, 2, 3, 4, 5]
- 
-# def tele_bot(hour,i):
-# 	hour = hour
-# 	i = i
-# 	msg = f'Hay Turno de consulado para Pasaporte Hora: {hour}'
-	
-# 	for i in range(len(id_list)):
-
-# 		bot.send_message(id_list[i], f'{msg}')
-
-
-
-
-
-# @bot.message_handler(commands=['start', 'help'])
-# def send_welcome(message):
-# 	bot.reply_to(message, "Howdy, how are you doing?")
-
-# @bot.message_handler(func=lambda message: True)
-# def echo_all(message):
-# 	bot.reply_to(message, message.text)
