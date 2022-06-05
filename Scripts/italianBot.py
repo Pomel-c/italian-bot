@@ -67,12 +67,12 @@ def rellenoDatos():
         
 def login():
     mailBox = driver.find_element(By.ID,"login-email")
-    mailBox.send_keys("carmenjose9.m@gmail.com")
+    mailBox.send_keys("turnos.prenota.mendoza@gmail.com")
     
     
 
     passBox = driver.find_element(By.ID,"login-password")
-    passBox.send_keys("Nikon1779")
+    passBox.send_keys("turnoMendoza1")
     
     time.sleep(5)
     passBox.send_keys(Keys.RETURN)
