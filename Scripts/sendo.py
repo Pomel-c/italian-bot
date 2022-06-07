@@ -2,7 +2,6 @@ from re import A
 import smtplib
 import imghdr
 from email.message import EmailMessage
-import csv
 from time import sleep
 import time 
 from googleapiclient.discovery import build
