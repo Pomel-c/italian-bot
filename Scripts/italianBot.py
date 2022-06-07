@@ -16,7 +16,7 @@ from var_sv import rde, wrt
 
 ## Iniciar firefox minimizado
 options = Options()
-options.headless = True
+options.headless = False
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
 
 ## activar para ver errores en el navegador
@@ -66,7 +66,7 @@ def rellenoDatos():
     obj.accept()
         
 def login():
-    mailBox = driver.find_element(By.ID,"login-email")
+    mailBox = driver.find_element(By.ID,"login-email")    
     mailBox.send_keys("turnos.prenota.mendoza@gmail.com")
     
     
@@ -77,10 +77,7 @@ def login():
     time.sleep(5)
     passBox.send_keys(Keys.RETURN)
 
-    time.sleep(10)
-
-    #if driver.title == 'Home Page - Prenot@Mi':
-       #passBox.send_keys(Keys.RETURN)
+    time.sleep(20)
 
 def dataHoy():
     ## hora
@@ -93,69 +90,142 @@ def dataHoy():
 
     return dia, hour
 
-def chequeo(i, hour, dia, url):
-
+def chequeo(i, hour, dia, url, intento):
+    
+    
+    time.sleep(5)
     # chequeo si se abrio el index
     if url == 'https://prenotami.esteri.it/Services':
-        #driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-        msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia}'
+        driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+        msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
       
     ## chequeo si se abrio el calendario
     elif url == 'https://prenotami.esteri.it/Services/Booking/552':
         driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-        msg = f'Hay turnos, intento {i} Hora: {hour} del {dia}'
+        msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
         sendoMail(i,hour)
 
     ## si tira error por cualquier otra cosa
     else:
         driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-        msg = f'Error {i} Hora: {hour} del {dia}'
+        msg = f'Error {i} Hora: {hour} del {dia} en el intento: {intento}'
 
     return msg
+
+def error():
+
+    if driver.title == 'Runtime Error':
+            while driver.title != 'Index - Prenot@Mi':
+                driver.get('https://prenotami.esteri.it/Services')
+
+                if driver.title == 'Home Page - Prenot@Mi':
+                    break
+    return
 
 
 def main():  
     
-    driver.get('https://prenotami.esteri.it/Home?ReturnUrl=%2fServices')
+    intento = 0
     i = rde()
-
     dia, hour = dataHoy()
-
-
     msg = f'Problema de conexion {i} Hora: {hour} del {dia}'
 
-    ## login
-    login()
-    time.sleep(5)
-    
-    ## chequeo si entre a la pagina de prenota
-    if driver.title == 'Sede - Prenot@Mi':
 
-        # redirecciono a la pagina del formulario
-        driver.get('https://prenotami.esteri.it/Services')
-        
+    # Entro a la pagina de Prenota
+    driver.get('https://prenotami.esteri.it/Home?ReturnUrl=%2fUserArea')
 
-        #time.sleep(5)
-        #login()
+    # Chequeo si tiro error
+    if driver.title == 'Runtime Error':
+                while driver.title != 'Home Page - Prenot@Mi':
+                    driver.get('https://prenotami.esteri.it/Home?ReturnUrl=%2fUserArea')
 
+    # Intento Logear
+    while driver.title == 'Home Page - Prenot@Mi' or driver.title == 'Sede - Prenot@Mi':
         time.sleep(5)
-
-        prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
-        prenota.send_keys(Keys.RETURN)
-        time.sleep(5)
-
-        url = driver.current_url
-        msg = chequeo(i, hour, dia, url)
-
-        
-    #else:
-        #driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-
     
+        if driver.title == 'Home Page - Prenot@Mi':
+            login()
+
+        if driver.title == 'Sede - Prenot@Mi': 
+            if len(driver.find_elements(By.ID,'advanced')) != 0:
+                # redirecciono a la pagina del formulario
+                prenota = driver.find_element(By.ID,'advanced')
+                prenota.send_keys(Keys.RETURN)
+                time.sleep(5)
+
+            elif len(driver.find_elements(By.ID,'advanced')) != 0:
+                driver.get('https://prenotami.esteri.it/UserArea')
+
+        while driver.title == 'Index - Prenot@Mi':
+            if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) != 0:
+                prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
+                prenota.send_keys(Keys.RETURN)
+                time.sleep(5)
+
+                if driver.title == 'Index - Prenot@Mi':
+                    break
+
+            if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) == 0:
+                driver.get('https://prenotami.esteri.it/Services')
+                time.sleep(5)
+
+            
+
+        if driver.title == 'Si è verificato un errore durante l’elaborazione della richiesta - Prenot@Mi':
+            driver.get('https://prenotami.esteri.it/Home?ReturnUrl=%2fUserArea')
+
+        intento += 1
+        if intento == 10:
+            break
+
+
+    url = driver.current_url
+    msg = chequeo(i, hour, dia, url, intento)
     i = i + 1
     wrt(i, msg)
 
     driver.quit()
+    
+    # prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
+    # prenota.send_keys(Keys.RETURN)
+    # time.sleep(10)
+
+    # Si tengo error de la pagina
+    #while driver.title == 'Runtime Error':
+#
+    #    # Si no entro al index busco el boton de prenota
+    #        while driver.title != 'Index - Prenot@Mi':
+    #            prenota = driver.find_element(By.ID,'advanced')
+    #            prenota.send_keys(Keys.RETURN)
+#
+    #        if driver.title != 'Home Page - Prenot@Mi':
+    #            prenota = driver.find_element(By.ID,'advanced')
+    #            prenota.send_keys(Keys.RETURN)
+
+
+    
+    # chequeo si entre a la pagina de prenota
+    
+        #time.sleep(5)
+        #login()
+
+    #while driver.title == 'Home Page - Prenot@Mi':
+    #    login()
+    #    error()
+#
+    #    while driver.title == 'Sede - Prenot@Mi':
+    #        prenota = driver.find_element(By.ID,'advanced')
+    #        prenota.send_keys(Keys.RETURN)
+    #        time.sleep(5)
+#
+    #    prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
+    #    prenota.send_keys(Keys.RETURN)
+
+    
+    #else:
+        #driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+    
+    
 
 
 main()

@@ -60,7 +60,7 @@ def sendoMail(numero, hour):
     Reciever_Email1 = mailList()
     i = numero
     Sender_Email = "turnos.prenota.mendoza@gmail.com"
-    Reciever_Email = ["anaromagnolimza@gmail.com","gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"]
+    Reciever_Email = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"]
     Password = 'phrqkmukyijrofnw'
     
     hour = hour
