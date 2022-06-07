@@ -151,7 +151,7 @@ def main():
                 # redirecciono a la pagina del formulario
                 prenota = driver.find_element(By.ID,'advanced')
                 prenota.send_keys(Keys.RETURN)
-                time.sleep(5)
+                time.sleep(15)
 
             elif len(driver.find_elements(By.ID,'advanced')) != 0:
                 driver.get('https://prenotami.esteri.it/UserArea')
@@ -181,7 +181,7 @@ def main():
                     
                     break
 
-        if driver.title == 'Si è verificato un errore durante l’elaborazione della richiesta - Prenot@Mi':
+        while driver.title == 'Si è verificato un errore durante l’elaborazione della richiesta - Prenot@Mi':
             driver.get('https://prenotami.esteri.it/Home?ReturnUrl=%2fUserArea')
 
         intento += 1
