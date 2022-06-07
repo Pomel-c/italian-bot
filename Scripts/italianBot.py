@@ -162,7 +162,7 @@ def main():
                 prenota.send_keys(Keys.RETURN)
                 time.sleep(5)
 
-                if driver.title == 'Index - Prenot@Mi':
+                if driver.title == 'Index - Prenot@Mi' or driver.current_url == 'https://prenotami.esteri.it/Services/Booking/552':
                     break
 
             if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) == 0:
