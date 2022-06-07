@@ -4,7 +4,7 @@
 def wrt(i, msg):
     ## Escribo el numero en el archivo
     nume = i
-    path = "D:\Documentos\Bot ciudadania\Textos\sumero.txt"
+    path = "D:\Documentos\Bot ciudadania\Textos\intento.txt"
     num_file = open(path, "w") 
     num = repr(nume)
     num_file.write(num)
@@ -21,7 +21,7 @@ def wrt(i, msg):
 
 def rde():
     ## Leo el numero que esta escrito en el archivo
-    path = "D:\Documentos\Bot ciudadania\Textos\sumero.txt"
+    path = "D:\Documentos\Bot ciudadania\Textos\intento.txt"
     f = open(path, "r")
     nums = f.readlines()
     nums = [int(i) for i in nums]

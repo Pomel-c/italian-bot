@@ -168,6 +168,8 @@ def main():
                 time.sleep(20)
 
                 if driver.current_url == 'https://prenotami.esteri.it/Services' or driver.current_url == 'https://prenotami.esteri.it/Services/Booking/552':
+                    url = driver.current_url
+                    driver.quit()
                     break
 
             
@@ -179,15 +181,16 @@ def main():
 
         intento += 1
         if intento == 10:
+            url = driver.current_url
+            driver.quit()
             break
 
 
-    url = driver.current_url
+    
     msg = chequeo(i, hour, dia, url, intento)
     i = i + 1
     wrt(i, msg)
 
-    driver.quit()
     
     # prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
     # prenota.send_keys(Keys.RETURN)
