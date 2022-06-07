@@ -77,10 +77,10 @@ def login():
     time.sleep(5)
     passBox.send_keys(Keys.RETURN)
 
-    time.sleep(5)
+    time.sleep(10)
 
-    if driver.title == 'Home Page - Prenot@Mi':
-        passBox.send_keys(Keys.RETURN)
+    #if driver.title == 'Home Page - Prenot@Mi':
+       #passBox.send_keys(Keys.RETURN)
 
 def dataHoy():
     ## hora
@@ -134,7 +134,12 @@ def main():
         # redirecciono a la pagina del formulario
         driver.get('https://prenotami.esteri.it/Services')
         
+
+        #time.sleep(5)
+        #login()
+
         time.sleep(5)
+
         prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
         prenota.send_keys(Keys.RETURN)
         time.sleep(5)
@@ -143,9 +148,9 @@ def main():
         msg = chequeo(i, hour, dia, url)
 
         
-    else:
-        driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-        
+    #else:
+        #driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+
     
     i = i + 1
     wrt(i, msg)
