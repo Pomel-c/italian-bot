@@ -1,3 +1,4 @@
+.gitignore
 venv
 venv/Lib
 venv/Include
@@ -11,3 +12,5 @@ sumero.txt
 keys.json
 quickstart.py
 id_lista.txt
+__pycache__
+run.bat

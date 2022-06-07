@@ -16,7 +16,7 @@ from var_sv import rde, wrt
 
 ## Iniciar firefox minimizado
 options = Options()
-options.headless = False
+options.headless = True
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
 
 ## activar para ver errores en el navegador
