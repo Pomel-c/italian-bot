@@ -127,20 +127,30 @@ def main():
     # Escribo en el Log
     driver.quit()
 
+    verf1 = False
+    verf2 = False
+
     # Chequeo de seguridad, tamaño de la imagen
     size = os.path.getsize(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png') 
     if size - 96000 <= 1000:
-        sendoMail(i, hour)
+        verf1 = True
+        msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
 
     # Chequeo de seguridad, palabras escritas de la imagen
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
     text = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
     frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni']
+
     for frase in frases:    
         if frase in text:
-            sendoMail(i, hour)
+            verf2 = True
+            msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
             break
-        
+
+    if verf1 or verf2:
+        sendoMail(i, hour)
+    
+
     i = i + 1
     wrt(i, msg)
 
