@@ -1,9 +1,10 @@
 from lib2to3.pgen2 import driver
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
 from selenium.webdriver.common.by import By
 import time
+import os
+import pytesseract
 from datetime import datetime, date
 from selenium.webdriver.firefox.options import Options
 
@@ -104,7 +105,7 @@ def main():
                     url = driver.current_url
                     
                     if url == 'https://prenotami.esteri.it/Services':
-                        #driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+                        driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
                         msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
 
                     if url == 'https://prenotami.esteri.it/Services/Booking/552':
@@ -125,6 +126,21 @@ def main():
     
     # Escribo en el Log
     driver.quit()
+
+    # Chequeo de seguridad, tamaño de la imagen
+    size = os.path.getsize(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png') 
+    if size - 96000 <= 1000:
+        sendoMail(i, hour)
+
+    # Chequeo de seguridad, palabras escritas de la imagen
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    text = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+    frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni']
+    for frase in frases:    
+        if frase in text:
+            sendoMail(i, hour)
+            break
+        
     i = i + 1
     wrt(i, msg)
 
