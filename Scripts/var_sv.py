@@ -2,37 +2,36 @@
 # FUNCIONES DEL BOT DEL CONSULADO
 
 def wrt(i, msg):
-    ## Escribo el numero en el archivo
-    nume = i
-    path = "D:\Documentos\Bot ciudadania\Textos\intento.txt"
-    num_file = open(path, "w") 
-    num = repr(nume)
+    ## Escribo el intentoro en el archivo
+    num_file = open("D:\Documentos\Bot ciudadania\Textos\intento.txt", "w") 
+    num = repr(i)
     num_file.write(num)
     num_file.close()
     
     ## Escribo el Log del momento
-    msg = msg
-    path = "D:\Facultad UM\log.txt"
-    log_file = open(path, "a") 
+    log_file = open("D:\Facultad UM\log.txt", "a") 
     data = repr(msg)
-    log_file.write(data)
-    log_file.write('\n')
+    log_file.write(data + '\n')
     log_file.close()
 
-def rde():
-    ## Leo el numero que esta escrito en el archivo
-    path = "D:\Documentos\Bot ciudadania\Textos\intento.txt"
-    f = open(path, "r")
-    nums = f.readlines()
-    nums = [int(i) for i in nums]
-    n = nums[0] 
-    return n
+
+def rde(i):
+
+    if i == 'intento':
+        f = open("D:\Documentos\Bot ciudadania\Textos\intento.txt", "r")
+        nums = f.readlines()
+        return nums[0]
+    else:
+        with open('D:\Documentos\Bot ciudadania\Textos\datos.txt') as file:
+            reader = file.readlines()
+            dato = reader[i].strip('\n')
+            return(dato)
+    
+    
+
 
 
 # FUNCIONES DEL BOT DE TELEGRAM
-
-
-
 def wrt_nuevo(id_nuevo):
     ## Escribo nuevo integrante en la lists
     id_nuevo = id_nuevo
@@ -67,11 +66,8 @@ def rde_list():
 
 
 def api():
-    path = "D:\Documentos\Bot ciudadania\Textos\API_KEY.txt"
-    f = open(path, "r")
-    api = f.readlines()
-    api = api[0]
-    
-    
+    with open('D:\Documentos\Bot ciudadania\Textos\datos.txt') as file:
+        reader = file.readlines()
+        api = reader[2].strip('\n')
     return api
     

@@ -1,6 +1,4 @@
 from lib2to3.pgen2 import driver
-from pickle import TRUE
-from select import select
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
@@ -20,60 +18,21 @@ options = Options()
 options.headless = True
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
 
-## activar para ver errores en el navegador
-#driver = webdriver.Firefox(executable_path=r'C:\Program Files (x86)\geckodriver.exe')
 
+def login(): 
 
-def rellenoDatos():
+    # Obtengo mail y contrasela
+    mailR = rde(0)
+    passW = rde(1)
     
-    ## ddls_0 posee pasaporte?  Drop downs
-    select = Select(driver.find_element(By.ID,'ddls_0'))
-    select.select_by_visible_text('No')
-    ## ddls_1 Hijos menores     Drop downs
-    select = Select(driver.find_element(By.ID,'ddls_1'))
-    select.select_by_value('12')
-    ## DatiAddizionaliPrenotante_2___testo cantidad de hijos menores        llenar textos
-    hijoMenor = driver.find_element(By.ID,'DatiAddizionaliPrenotante_2___testo')
-    hijoMenor.send_keys('0')
-    
-    ## DatiAddizionaliPrenotante_3___testo direccion completa de residencia llenar textos    
-    direccion = driver.find_element(By.ID,'DatiAddizionaliPrenotante_3___testo')
-    direccion.send_keys('MZA 64 CASA 30 B° DALVIAN - MENDOZA CAPITAL - MENDOZA')
-    
-    ## ddls_4 estado civil  Drop downs
-    select = Select(driver.find_element(By.ID,'ddls_4'))
-    select.select_by_value('16')
-    ## DatiAddizionaliPrenotante_5___testo nombre de conyuge    llenar textos
-    conyuge = driver.find_element(By.ID,'DatiAddizionaliPrenotante_5___testo')
-    conyuge.send_keys('-')
-    
-    ## File_2 subir primer archivo 
-    dni = driver.find_element(By.ID,'File_2')
-    dni.send_keys('D:\Documentos\Bot ciudadania\Dnis\mechulan.pdf')
-    ## File_3 subir segundo archivo
-    dni2 = driver.find_element(By.ID,'File_3')
-    dni2.send_keys('D:\Documentos\Bot ciudadania\Dnis\mechulan.pdf')
-    ## PrivacyCheck hacer click al boton
-    check = driver.find_element(By.ID,'PrivacyCheck')
-    check.click()
-    
-    ## btnAvanti hacer click al avance
-    avant = driver.find_element(By.ID,'btnAvanti')
-    avant.click()
-    
-    ##time.sleep(2)
-    ## aceptar pop up alert
-    obj = driver.switch_to.alert
-    obj.accept()
-        
-def login():
+    # Logeo
     mailBox = driver.find_element(By.ID,"login-email")    
-    mailBox.send_keys("turnos.prenota.mendoza@gmail.com")
+    mailBox.send_keys(mailR)
     
     
 
     passBox = driver.find_element(By.ID,"login-password")
-    passBox.send_keys("turnoMendoza1")
+    passBox.send_keys(passW)
     
     time.sleep(5)
     passBox.send_keys(Keys.RETURN)
@@ -91,41 +50,11 @@ def dataHoy():
 
     return dia, hour
 
-#def chequeo(i, hour, dia, url, intento):
-    
-    # chequeo si se abrio el index
-    #if url == 'https://prenotami.esteri.it/Services':
-    #    driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-    #    msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
-      
-    ## chequeo si se abrio el calendario
-    #elif url == 'https://prenotami.esteri.it/Services/Booking/552':
-    #    driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-    #    msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
-    #    sendoMail(i,hour)
-
-    ## si tira error por cualquier otra cosa
-    #else:
-    #    driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-    #    msg = f'Error {i} Hora: {hour} del {dia} en el intento: {intento}'
-#
-    #return #msg
-
-#def error():
-
-    #if driver.title == 'Runtime Error':
-    #        while driver.title != 'Index - Prenot@Mi':
-    #            driver.get('https://prenotami.esteri.it/Services')
-#
-    #            if driver.title == 'Home Page - Prenot@Mi':
-    #                break
-    #return
-
-
 def main():  
     
+    # Obtengo datos iniciales y mensaje default
     intento = 0
-    i = rde()
+    i = int(rde("intento"))
     dia, hour = dataHoy()
     msg = f'Problema de conexion {i} Hora: {hour} del {dia}'
 
@@ -154,9 +83,12 @@ def main():
                 time.sleep(15)
 
             elif len(driver.find_elements(By.ID,'advanced')) != 0:
+                # Chequeo si esta presente el boton de prenota, si no esta, recargo la pagina
                 driver.get('https://prenotami.esteri.it/UserArea')
 
         while driver.title == 'Index - Prenot@Mi':
+
+            # una vez que entro en el index, veo si aparece el boton de prenota. Si no recargo la pagina
             if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) == 0:
                 driver.get('https://prenotami.esteri.it/Services')
                 time.sleep(5)
@@ -167,11 +99,12 @@ def main():
                 prenota.send_keys(Keys.RETURN)
                 time.sleep(20)
 
+                # Chequeo si al apretar el boton de prenota entro al formulario o si me tira error de que no hay turnos
                 if driver.current_url == 'https://prenotami.esteri.it/Services' or driver.current_url == 'https://prenotami.esteri.it/Services/Booking/552':
                     url = driver.current_url
                     
                     if url == 'https://prenotami.esteri.it/Services':
-                        driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+                        #driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
                         msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
 
                     if url == 'https://prenotami.esteri.it/Services/Booking/552':
@@ -184,11 +117,13 @@ def main():
         while driver.title == 'Si è verificato un errore durante l’elaborazione della richiesta - Prenot@Mi':
             driver.get('https://prenotami.esteri.it/Home?ReturnUrl=%2fUserArea')
 
+        # 10 intentos de logear y chequear turnos, si no tiro mensaje de error
         intento += 1
         if intento == 10:
             url = driver.current_url
             break
-
+    
+    # Escribo en el Log
     driver.quit()
     i = i + 1
     wrt(i, msg)

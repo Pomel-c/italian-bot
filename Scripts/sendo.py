@@ -6,6 +6,7 @@ from time import sleep
 import time 
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
+from var_sv import rde
 
 
 
@@ -58,9 +59,9 @@ def sendoMail(numero, hour):
     
     Reciever_Email1 = mailList()
     i = numero
-    Sender_Email = "turnos.prenota.mendoza@gmail.com"
+    Sender_Email = rde(3) 
     Reciever_Email = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"]
-    Password = 'phrqkmukyijrofnw'
+    Password = rde(4) 
     
     hour = hour
     newMessage = EmailMessage()                         
@@ -85,9 +86,8 @@ def sendoMail(numero, hour):
 
     time.sleep(100)
     i = numero
-    Sender_Email = "turnos.prenota.mendoza@gmail.com"
-    
-    Password = 'phrqkmukyijrofnw'
+    Sender_Email = rde(3)
+    Password = rde(4)
     
     hour = hour
     newMessage = EmailMessage()                         
@@ -99,4 +99,3 @@ def sendoMail(numero, hour):
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(Sender_Email, Password)              
         smtp.send_message(newMessage)
-
