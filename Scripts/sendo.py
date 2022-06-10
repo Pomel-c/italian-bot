@@ -13,7 +13,7 @@ from var_sv import rde
 def mailList():
 
     SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-    SERVICE_ACCOUNT_FILE = 'keys.json'
+    SERVICE_ACCOUNT_FILE = 'D:\Documentos\Bot ciudadania\Scripts\keys.json'
     
     
     creds = None
@@ -53,11 +53,8 @@ def mailList():
     return mails
 
 
-
-
 def sendoMail(numero, hour):
     
-    Reciever_Email1 = mailList()
     i = numero
     Sender_Email = rde(3) 
     Reciever_Email = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"]
@@ -83,12 +80,14 @@ def sendoMail(numero, hour):
     
     
 
-
+    Reciever_Email1 = mailList()
     time.sleep(100)
+
     i = numero
     Sender_Email = rde(3)
     Password = rde(4)
-    
+    Reciever_Email1 = mailList()
+
     hour = hour
     newMessage = EmailMessage()                         
     newMessage['Subject'] = f"Hay Turno de consulado para Pasaporte Hora: {hour}" 
