@@ -16,9 +16,10 @@ from var_sv import rde, wrt
 
 ## Iniciar firefox minimizado
 options = Options()
-options.headless = True
+options.headless = False
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
 
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def login(): 
 
@@ -62,9 +63,9 @@ def verf(i, hour, dia, intento):
         verf1 = True
         
     # Chequeo de seguridad, palabras escritas de la imagen
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    
     text = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-    frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni', 'Servizio di rilascio passaporti', 'prenotando per 1 Appuntamento', 'Figli minorenni', 'Informazioni sulla prenotazione']
+    frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni', 'Servizio di rilascio passaporti', 'prenotando per 1 Appuntamento', 'Figli minorenni', 'Informazioni sulla prenotazione', 'Numero figli minorenni', 'Prenotazione Singola']
 
     for frase in frases:    
         if frase in text:
@@ -77,11 +78,11 @@ def verf(i, hour, dia, intento):
 
     else:
         msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
-        
+
     return msg
 
 def main():  
-    
+
     # Obtengo datos iniciales y mensaje default
     intento = 0
     dia, hour = dataHoy()
@@ -127,18 +128,35 @@ def main():
             if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) != 0:
                 prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
                 prenota.send_keys(Keys.RETURN)
-                time.sleep(30)
+                time.sleep(40)
 
                 # Chequeo si al apretar el boton de prenota entro al formulario o si me tira error de que no hay turnos
                 if driver.current_url == 'https://prenotami.esteri.it/Services' or driver.current_url == 'https://prenotami.esteri.it/Services/Booking/552':
                     url = driver.current_url
-                    
+                    suma = 0
                     i = int(rde("intento"))
 
-                    if url == 'https://prenotami.esteri.it/Services':
-                        driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-                        #msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
+                    prenota_error = 'Al momento non ci sono date disponibili per il servizio richiesto'
+                    
+                    
+                    while driver.current_url == 'https://prenotami.esteri.it/Services':
 
+                        driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+                        texto = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+
+                        if prenota_error in texto:
+                            break
+
+                        else:
+                            if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) != 0:
+                                prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
+                                prenota.send_keys(Keys.RETURN)
+                                time.sleep(20)
+                            suma += 1
+
+                            if suma == 5:
+                                break
+                
                     if url == 'https://prenotami.esteri.it/Services/Booking/552':
                         driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
                         #msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
@@ -161,6 +179,7 @@ def main():
     msg = verf(i, hour, dia, intento)
     i = i + 1
     wrt(i, msg)
+
 
 main()
 
