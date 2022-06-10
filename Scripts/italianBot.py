@@ -51,12 +51,41 @@ def dataHoy():
 
     return dia, hour
 
+def verf(i, hour, dia, intento):
+    verf1 = False
+    verf2 = False
+
+
+    # Chequeo de seguridad, tamaño de la imagen
+    size = os.path.getsize(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png') 
+    if size - 96000 <= 1000:
+        verf1 = True
+        
+    # Chequeo de seguridad, palabras escritas de la imagen
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    text = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+    frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni', 'Servizio di rilascio passaporti', 'prenotando per 1 Appuntamento', 'Figli minorenni', 'Informazioni sulla prenotazione']
+
+    for frase in frases:    
+        if frase in text:
+            verf2 = True
+            break
+
+    if verf1 and verf2:
+        msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
+        sendoMail(i, hour)
+
+    else:
+        msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
+        
+    return msg
+
 def main():  
     
     # Obtengo datos iniciales y mensaje default
     intento = 0
-    i = int(rde("intento"))
     dia, hour = dataHoy()
+    i = int(rde("intento"))
     msg = f'Problema de conexion {i} Hora: {hour} del {dia}'
 
 
@@ -98,19 +127,21 @@ def main():
             if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) != 0:
                 prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
                 prenota.send_keys(Keys.RETURN)
-                time.sleep(20)
+                time.sleep(30)
 
                 # Chequeo si al apretar el boton de prenota entro al formulario o si me tira error de que no hay turnos
                 if driver.current_url == 'https://prenotami.esteri.it/Services' or driver.current_url == 'https://prenotami.esteri.it/Services/Booking/552':
                     url = driver.current_url
                     
+                    i = int(rde("intento"))
+
                     if url == 'https://prenotami.esteri.it/Services':
                         driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-                        msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
+                        #msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
 
                     if url == 'https://prenotami.esteri.it/Services/Booking/552':
                         driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-                        msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
+                        #msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
                         sendoMail(i,hour)
                     
                     break
@@ -127,30 +158,9 @@ def main():
     # Escribo en el Log
     driver.quit()
 
-    verf1 = False
-    verf2 = False
-
-
-    # Chequeo de seguridad, tamaño de la imagen
-    size = os.path.getsize(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png') 
-    if size - 96000 <= 1000:
-        verf1 = True
-        
-    # Chequeo de seguridad, palabras escritas de la imagen
-    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-    text = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-    frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni', 'Servizio di rilascio passaporti', 'prenotando per 1 Appuntamento', 'Figli minorenni', 'Informazioni sulla prenotazione']
-
-    for frase in frases:    
-        if frase in text:
-            verf2 = True
-            break
-
-    if verf1 and verf2:
-        msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
-        sendoMail(i, hour)
-
+    msg = verf(i, hour, dia, intento)
     i = i + 1
     wrt(i, msg)
 
 main()
+
