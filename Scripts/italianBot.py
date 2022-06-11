@@ -194,7 +194,7 @@ def main():
     msg = verf(i, hour, dia, intento)
 
     if bandera == 1:
-        msg = f'Error, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
+        msg = f'Error de conexión, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
 
     i = i + 1
     wrt(i, msg)
