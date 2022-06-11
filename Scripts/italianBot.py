@@ -16,7 +16,7 @@ from var_sv import rde, wrt
 
 ## Iniciar firefox minimizado
 options = Options()
-options.headless = False
+options.headless = True
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -58,10 +58,23 @@ def verf(i, hour, dia, intento):
 
 
     # Chequeo de seguridad, tamaño de la imagen
-    size = os.path.getsize(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png') 
-    if size - 96000 <= 1000:
-        verf1 = True
+    #size = os.path.getsize(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png') 
+    #if size - 96000 <= 1000:
+    #    verf1 = True
+
+    # Chequeo si estan las palabras en el html
+    check = 0
+    html = driver.page_source
+    frases_1 = ['Servizio di rilascio passaporti', 'Informazioni sulla prenotazione', 'Tipo Prenotazion', 'Prenotazione Signola', 'Dati Richiedente', 'In possesso di passaporto italiano scaduto/in scadenza', 'Figli minorenni', 'Numero figli minorenni', 'Stai prenotando per 1 Appuntamento']
+    for frase in frases_1:
+        if frase in html:
+            check += 1
         
+        if check == 3:
+            verf1 = True
+            break
+
+
     # Chequeo de seguridad, palabras escritas de la imagen
     
     text = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
@@ -72,12 +85,12 @@ def verf(i, hour, dia, intento):
             verf2 = True
             break
 
-    if verf1 and verf2:
-        msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
+    if verf1 or verf2:
+        msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
         sendoMail(i, hour)
 
     else:
-        msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia} en el intento: {intento}'
+        msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
 
     return msg
 
@@ -138,13 +151,14 @@ def main():
 
                     prenota_error = 'Al momento non ci sono date disponibili per il servizio richiesto'
                     
-                    
+                    # Chequeo si me tira el cartel de que no hay turno disponibles
                     while driver.current_url == 'https://prenotami.esteri.it/Services':
 
                         driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
                         texto = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+                        html = driver.page_source
 
-                        if prenota_error in texto:
+                        if prenota_error in texto or prenota_error in html:
                             break
 
                         else:
