@@ -55,7 +55,6 @@ def mailList():
 
 def sendoMail(numero, hour):
     
-    i = numero
     Sender_Email = rde(3) 
     Reciever_Email = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"]
     Password = rde(4) 
@@ -83,7 +82,6 @@ def sendoMail(numero, hour):
     Reciever_Email1 = mailList()
     time.sleep(100)
 
-    i = numero
     Sender_Email = rde(3)
     Password = rde(4)
     Reciever_Email1 = mailList()
