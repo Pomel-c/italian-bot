@@ -56,21 +56,15 @@ def verf(i, hour, dia, intento):
     verf1 = False
     verf2 = False
 
-
-    # Chequeo de seguridad, tamaño de la imagen
-    #size = os.path.getsize(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png') 
-    #if size - 96000 <= 1000:
-    #    verf1 = True
-
     # Chequeo si estan las palabras en el html
     check = 0
     html = driver.page_source
-    frases_1 = ['Servizio di rilascio passaporti', 'Informazioni sulla prenotazione', 'Tipo Prenotazion', 'Prenotazione Signola', 'Dati Richiedente', 'In possesso di passaporto italiano scaduto/in scadenza', 'Figli minorenni', 'Numero figli minorenni', 'Stai prenotando per 1 Appuntamento']
-    for frase in frases_1:
+    frases = ['Informazioni sulla prenotazione', 'Tipo Prenotazion', 'Prenotazione Signola', 'Dati Richiedente', 'In possesso di passaporto italiano scaduto/in scadenza', 'Figli minorenni', 'Numero figli minorenni', 'Stai prenotando per 1 Appuntamento']
+    for frase in frases:
         if frase in html:
             check += 1
         
-        if check == 3:
+        if check == 4:
             verf1 = True
             break
 
@@ -80,12 +74,18 @@ def verf(i, hour, dia, intento):
     text = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
     frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni', 'Servizio di rilascio passaporti', 'prenotando per 1 Appuntamento', 'Figli minorenni', 'Informazioni sulla prenotazione', 'Numero figli minorenni', 'Prenotazione Singola']
 
+    check = 0
+    
     for frase in frases:    
         if frase in text:
+            print(frase)
+            check += 1
+        
+        if check == 3:
             verf2 = True
             break
 
-    if verf1 or verf2:
+    if verf1 and verf2:
         msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
         sendoMail(i, hour)
 
@@ -98,6 +98,7 @@ def main():
 
     # Obtengo datos iniciales y mensaje default
     intento = 0
+    bandera = 0
     dia, hour = dataHoy()
     i = int(rde("intento"))
     msg = f'Problema de conexion {i} Hora: {hour} del {dia}'
@@ -184,16 +185,21 @@ def main():
         # 10 intentos de logear y chequear turnos, si no tiro mensaje de error
         intento += 1
         if intento == 10:
-            url = driver.current_url
+            bandera = 1
+            driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
             break
     
     # Escribo en el Log
-    driver.quit()
 
     msg = verf(i, hour, dia, intento)
+
+    if bandera == 1:
+        msg = f'Error, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
+
     i = i + 1
     wrt(i, msg)
 
+    driver.quit()
 
 main()
 
