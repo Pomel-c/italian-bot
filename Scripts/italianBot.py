@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 import os
+from os import walk
 import pytesseract
 from datetime import datetime, date
 from selenium.webdriver.firefox.options import Options
@@ -203,3 +204,10 @@ def main():
 
 main()
 
+
+# Borro screens de mas de un dia
+mypath = "D:\Documentos\Bot ciudadania\screenshots"
+items = next(walk(mypath), (None, None, []))[2]
+if len(items) >= 750:    
+    for item in items:
+        os.remove(f"D:\Documentos\Bot ciudadania\sceenshots\{item}")
