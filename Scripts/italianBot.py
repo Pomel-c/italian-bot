@@ -88,7 +88,7 @@ def verf(i, hour, dia, intento):
 
     if verf1 and verf2:
         msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
-        sendoMail(i, hour)
+        sendoMail(i, hour, verf1, verf2)
 
     else:
         msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
@@ -176,7 +176,7 @@ def main():
                     if url == 'https://prenotami.esteri.it/Services/Booking/552':
                         driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
                         #msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
-                        sendoMail(i,hour)
+                        #sendoMail(i,hour)
                     
                     break
 
@@ -195,7 +195,7 @@ def main():
     msg = verf(i, hour, dia, intento)
 
     if bandera == 1:
-        msg = f'Error de conexión, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
+        msg = f'Error de conexion, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
 
     i = i + 1
     wrt(i, msg)
@@ -205,7 +205,7 @@ def main():
 main()
 
 
-# Borro screens de mas de un dia
+# Borro screens de mas de un dia 672 = 1 dia
 mypath = "D:\Documentos\Bot ciudadania\screenshots"
 items = next(walk(mypath), (None, None, []))[2]
 if len(items) >= 750:    
