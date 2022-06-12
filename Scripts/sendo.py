@@ -49,29 +49,41 @@ def mailList():
         mails.append(i[2])
     
     mails = list(dict.fromkeys(mails))
-
     return mails
 
 
-def sendoMail(numero, hour):
+def sendoMail(i, hour, verf1, verf2):
     
     Sender_Email = rde(3) 
-    Reciever_Email = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"]
     Password = rde(4) 
+
+    mails = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"]
+    Reciever_Email = mailList()
+    for mail in Reciever_Email:
+        mails.append(mail)
+
+    mails = list(dict.fromkeys(mails)) 
     
     hour = hour
     newMessage = EmailMessage()                         
     newMessage['Subject'] = f"Hay Turno de consulado para Pasaporte Hora: {hour}" 
     newMessage['From'] = Sender_Email                   
     newMessage['To'] = Reciever_Email                   
-    newMessage.set_content('Entra ya: https://prenotami.esteri.it/Services/Booking/552') 
+    newMessage.set_content(f'''
+
+    Entra ya: https://prenotami.esteri.it/Services/Booking/552
     
-    ## with open(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png', 'rb') as f:
-    ##     image_data = f.read()
-    ##     image_type = imghdr.what(f.name)
-    ##     image_name = f.name
-    ## 
-    ## newMessage.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
+    Se encontro un turno en el intento {i}, gracias a la verificacion {verf1}, {verf2}.
+    
+
+    ''') 
+    
+    with open(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png', 'rb') as f:
+        image_data = f.read()
+        image_type = imghdr.what(f.name)
+        image_name = f.name
+    
+    newMessage.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
     
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
         smtp.login(Sender_Email, Password)              
@@ -79,20 +91,3 @@ def sendoMail(numero, hour):
     
     
 
-    Reciever_Email1 = mailList()
-    time.sleep(100)
-
-    Sender_Email = rde(3)
-    Password = rde(4)
-    Reciever_Email1 = mailList()
-
-    hour = hour
-    newMessage = EmailMessage()                         
-    newMessage['Subject'] = f"Hay Turno de consulado para Pasaporte Hora: {hour}" 
-    newMessage['From'] = Sender_Email                   
-    newMessage['To'] = Reciever_Email1                   
-    newMessage.set_content('Entra ya: https://prenotami.esteri.it/Services/Booking/552') 
-
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(Sender_Email, Password)              
-        smtp.send_message(newMessage)
