@@ -3,7 +3,6 @@ import smtplib
 import imghdr
 from email.message import EmailMessage
 from time import sleep
-import time 
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from var_sv import rde
@@ -70,7 +69,7 @@ def sendoMail(i, hour):
     newMessage = EmailMessage()                         
     newMessage['Subject'] = f"Hay Turno de consulado para Pasaporte Hora: {hour}" 
     newMessage['From'] = Sender_Email                   
-    newMessage['To'] = mails                  
+    newMessage['BBC'] = mails                  
     newMessage.set_content(f'''
 
     Entra ya: https://prenotami.esteri.it/Services/Booking/552
