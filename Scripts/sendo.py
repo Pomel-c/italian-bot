@@ -52,7 +52,7 @@ def mailList():
     return mails
 
 
-def sendoMail(i, hour, verf1, verf2):
+def sendoMail(i, hour):
     
     Sender_Email = rde(3) 
     Password = rde(4) 
@@ -68,12 +68,12 @@ def sendoMail(i, hour, verf1, verf2):
     newMessage = EmailMessage()                         
     newMessage['Subject'] = f"Hay Turno de consulado para Pasaporte Hora: {hour}" 
     newMessage['From'] = Sender_Email                   
-    newMessage['To'] = Reciever_Email                   
+    newMessage['To'] = mails                  
     newMessage.set_content(f'''
 
     Entra ya: https://prenotami.esteri.it/Services/Booking/552
     
-    Se encontro un turno en el intento {i}, gracias a la verificacion {verf1}, {verf2}.
+    Se encontro un turno en el intento {i}.
     
 
     ''') 
@@ -90,4 +90,3 @@ def sendoMail(i, hour, verf1, verf2):
         smtp.send_message(newMessage)
     
     
-

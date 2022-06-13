@@ -88,7 +88,7 @@ def verf(i, hour, dia, intento):
 
     if verf1 and verf2:
         msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
-        sendoMail(i, hour, verf1, verf2)
+        sendoMail(i, hour)
 
     else:
         msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
@@ -206,8 +206,8 @@ main()
 
 
 # Borro screens de mas de un dia 672 = 1 dia
-mypath = "D:\Documentos\Bot ciudadania\screenshots"
-items = next(walk(mypath), (None, None, []))[2]
-if len(items) >= 750:    
-    for item in items:
-        os.remove(f"D:\Documentos\Bot ciudadania\sceenshots\{item}")
+#mypath = "D:\Documentos\Bot ciudadania\screenshots"
+#items = next(walk(mypath), (None, None, []))[2]
+#if len(items) >= 750:    
+#    for item in items:
+#        os.remove(f"D:\Documentos\Bot ciudadania\sceenshots\{item}")
