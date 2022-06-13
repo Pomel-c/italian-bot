@@ -7,7 +7,7 @@ import time
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from var_sv import rde
-
+import random
 
 
 def mailList():
@@ -64,6 +64,8 @@ def sendoMail(i, hour):
 
     mails = list(dict.fromkeys(mails)) 
     
+    random.shuffle(mails)
+
     hour = hour
     newMessage = EmailMessage()                         
     newMessage['Subject'] = f"Hay Turno de consulado para Pasaporte Hora: {hour}" 
