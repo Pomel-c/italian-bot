@@ -2,11 +2,12 @@ from re import A
 import smtplib
 import imghdr
 from email.message import EmailMessage
-from time import sleep
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from var_sv import rde
 import random
+import math
+import numpy as np
 
 
 def mailList():
@@ -38,7 +39,7 @@ def mailList():
     # Call the Sheets API
     sheet = service.spreadsheets()
     result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                range="respuesta!A1:C300").execute()
+                                range="respuesta!A1:C1000").execute()
                                 
     values = result.get('values', [])
     
@@ -62,32 +63,37 @@ def sendoMail(i, hour):
         mails.append(mail)
 
     mails = list(dict.fromkeys(mails)) 
-    
     random.shuffle(mails)
 
-    hour = hour
-    newMessage = EmailMessage()                         
-    newMessage['Subject'] = f"Hay Turno de consulado para Pasaporte Hora: {hour}" 
-    newMessage['From'] = Sender_Email                   
-    newMessage['BBC'] = mails                  
-    newMessage.set_content(f'''
+    # Divido la lista de mails en partes de menos de 100
+    n = math.ceil(len(mails)/100)
+    mail_arrays = np.array_split(mails, n)
+    
+    for j in range(n):
+        hour = hour
+        newMessage = EmailMessage()                         
+        newMessage['Subject'] = f"Hay Turno de consulado para Pasaporte Hora: {hour}" 
+        newMessage['From'] = Sender_Email                   
+        newMessage['BCC'] = mail_arrays[j]                  
+        newMessage.set_content(f'''
 
-    Entra ya: https://prenotami.esteri.it/Services/Booking/552
+Entra ya: https://prenotami.esteri.it/Services/Booking/552
     
-    Se encontro un turno en el intento {i}.
+Se encontro un turno en el intento {i}.
     
 
-    ''') 
+''') 
     
-    with open(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png', 'rb') as f:
-        image_data = f.read()
-        image_type = imghdr.what(f.name)
-        image_name = f.name
+        with open(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png', 'rb') as f:
+            image_data = f.read()
+            image_type = imghdr.what(f.name)
+            image_name = f.name
     
-    newMessage.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
+        newMessage.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
     
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(Sender_Email, Password)              
-        smtp.send_message(newMessage)
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(Sender_Email, Password)              
+            smtp.send_message(newMessage)
+
     
     
