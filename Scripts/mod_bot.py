@@ -7,6 +7,18 @@ API_KEY = api()
 bot = telebot.TeleBot(API_KEY)
 
 
+ids = open('D:\Documentos\Bot ciudadania\Textos\id_lista.txt', 'r')
+reader = ids.readlines()
+idl = []
+for line in reader:
+    idl.append(line.rstrip('\n'))
+
+def tele(i, hour):
+	for id in idl:
+		bot .send_message(id,f'Hay turnos de consulado hora: {hour}')
+		photo = open(f"D://Documentos//Bot ciudadania//screenshots//screen_{i}.png", 'rb')
+		bot.send_photo(id, photo)
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -35,7 +47,6 @@ def start(message):
 	bot.send_message(message.chat.id, f'Fuiste removido de la lista de mensajes \nNueva lista {id_list}')
 
 
-
-bot.polling()
+#bot.polling()
 
 

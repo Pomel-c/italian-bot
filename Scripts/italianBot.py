@@ -12,6 +12,7 @@ from selenium.webdriver.firefox.options import Options
 
 from sendo import sendoMail
 from var_sv import rde, wrt
+from mod_bot import tele
 
 ## ./venv/Scripts/activate.ps1   
 
@@ -88,6 +89,7 @@ def verf(i, hour, dia, intento):
 
     if verf1 and verf2:
         msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
+        tele(i, hour)
         sendoMail(i, hour)
 
     else:
