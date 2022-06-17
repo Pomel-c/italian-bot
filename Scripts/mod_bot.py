@@ -9,12 +9,12 @@ bot = telebot.TeleBot(API_KEY)
 
 ids = open('D:\Documentos\Bot ciudadania\Textos\id_lista.txt', 'r')
 reader = ids.readlines()
-idl = []
+id_list = []
 for line in reader:
-    idl.append(line.rstrip('\n'))
+    id_list.append(line.rstrip('\n'))
 
 def tele(i, hour):
-	for id in idl:
+	for id in id_list:
 		bot .send_message(id,f'Hay turnos de consulado hora: {hour}')
 		photo = open(f"D://Documentos//Bot ciudadania//screenshots//screen_{i}.png", 'rb')
 		bot.send_photo(id, photo)

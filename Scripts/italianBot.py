@@ -14,9 +14,9 @@ from sendo import sendoMail
 from var_sv import rde, wrt
 from mod_bot import tele
 
-## ./venv/Scripts/activate.ps1   
+# ./venv/Scripts/activate.ps1   
 
-## Iniciar firefox minimizado
+# Iniciar firefox minimizado
 options = Options()
 options.headless = True
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
@@ -130,7 +130,7 @@ def main():
                 prenota.send_keys(Keys.RETURN)
                 time.sleep(15)
 
-            elif len(driver.find_elements(By.ID,'advanced')) != 0:
+            elif len(driver.find_elements(By.ID,'advanced')) == 0:
                 # Chequeo si esta presente el boton de prenota, si no esta, recargo la pagina
                 driver.get('https://prenotami.esteri.it/UserArea')
 
@@ -172,7 +172,7 @@ def main():
                                 time.sleep(20)
                             suma += 1
 
-                            if suma == 5:
+                            if suma == 7:
                                 break
                 
                     if url == 'https://prenotami.esteri.it/Services/Booking/552':
