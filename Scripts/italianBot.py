@@ -91,11 +91,13 @@ def verf(i, hour, dia, intento):
         msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
         tele(i, hour)
         sendoMail(i, hour)
+        return msg
 
     else:
         msg = f'No Hay turnos, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
+        return msg
 
-    return msg
+    
 
 def main():  
 
