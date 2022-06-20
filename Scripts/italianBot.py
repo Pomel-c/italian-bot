@@ -90,6 +90,7 @@ def verf(i, hour, dia, intento):
     if verf1 and verf2:
         msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
         tele(i, hour)
+        #time.sleep(60)
         sendoMail(i, hour)
         return msg
 

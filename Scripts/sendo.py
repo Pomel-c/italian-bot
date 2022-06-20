@@ -57,7 +57,7 @@ def sendoMail(i, hour):
     Sender_Email = rde(3) 
     Password = rde(4) 
 
-    mails = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com", "juanmechulan@gmail.com"]
+    mails = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com"]
     Reciever_Email = mailList()
     for mail in Reciever_Email:
         mails.append(mail)
