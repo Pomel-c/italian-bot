@@ -18,7 +18,7 @@ from mod_bot import tele
 
 # Iniciar firefox minimizado
 options = Options()
-options.headless = True
+options.headless = False
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -61,7 +61,7 @@ def verf(i, hour, dia, intento):
     # Chequeo si estan las palabras en el html
     check = 0
     html = driver.page_source
-    frases = ['Informazioni sulla prenotazione', 'Tipo Prenotazion', 'Prenotazione Signola', 'Dati Richiedente', 'In possesso di passaporto italiano scaduto/in scadenza', 'Figli minorenni', 'Numero figli minorenni', 'Stai prenotando per 1 Appuntamento']
+    frases = ['Informazioni sulla prenotazione', 'Tipo Prenotazion', 'Prenotazione Signola', 'Dati Richiedente', 'Indirizzo completo di residenza', 'Stato civile', 'In possesso di passaporto italiano scaduto/in scadenza', 'Figli minorenni', 'Numero figli minorenni', 'Stai prenotando per 1 Appuntamento']
     for frase in frases:
         if frase in html:
             check += 1
@@ -90,7 +90,6 @@ def verf(i, hour, dia, intento):
     if verf1 and verf2:
         msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
         tele(i, hour)
-        #time.sleep(60)
         sendoMail(i, hour)
         return msg
 
@@ -140,18 +139,18 @@ def main():
         while driver.title == 'Index - Prenot@Mi':
 
             # una vez que entro en el index, veo si aparece el boton de prenota. Si no recargo la pagina
-            if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) == 0:
+            if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[5]/td[4]/a/button')) == 0:
                 driver.get('https://prenotami.esteri.it/Services')
                 time.sleep(5)
 
 
-            if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')) != 0:
-                prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[3]/td[4]/a/button')
+            if len(driver.find_elements(By.XPATH, '/html/body/main/div[3]/div/table/tbody/tr[5]/td[4]/a/button')) != 0:
+                prenota = driver.find_element(By.XPATH,'/html/body/main/div[3]/div/table/tbody/tr[5]/td[4]/a/button')
                 prenota.send_keys(Keys.RETURN)
                 time.sleep(40)
 
                 # Chequeo si al apretar el boton de prenota entro al formulario o si me tira error de que no hay turnos
-                if driver.current_url == 'https://prenotami.esteri.it/Services' or driver.current_url == 'https://prenotami.esteri.it/Services/Booking/552':
+                if driver.current_url == 'https://prenotami.esteri.it/Services' or driver.current_url == 'https://prenotami.esteri.it/Services/Booking/1193':
                     url = driver.current_url
                     suma = 0
                     i = int(rde("intento"))
