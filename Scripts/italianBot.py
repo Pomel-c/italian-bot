@@ -18,7 +18,7 @@ from mod_bot import tele
 
 # Iniciar firefox minimizado
 options = Options()
-options.headless = False
+options.headless = True
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
@@ -210,8 +210,8 @@ main()
 
 
 # Borro screens de mas de un dia 672 = 1 dia
-#mypath = "D:\Documentos\Bot ciudadania\screenshots"
-#items = next(walk(mypath), (None, None, []))[2]
-#if len(items) >= 750:    
-#    for item in items:
-#        os.remove(f"D:\Documentos\Bot ciudadania\sceenshots\{item}")
+mypath = "D:\Documentos\Bot ciudadania\screenshots"
+items = next(walk(mypath), (None, None, []))[2]
+if len(items) >= 750:    
+    for item in items:
+        os.remove(f'D://Documentos//Bot ciudadania//screenshots//{item}')

@@ -53,5 +53,4 @@ def add_user():
 
 	bot.polling()
 
-add_user()
 
