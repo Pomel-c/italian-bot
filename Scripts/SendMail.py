@@ -4,7 +4,7 @@ import imghdr
 from email.message import EmailMessage
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-from var_sv import rde
+from WriteWriteInfo import read
 import random
 import math
 import numpy as np
@@ -13,7 +13,7 @@ import numpy as np
 def mailList():
 
     SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
-    SERVICE_ACCOUNT_FILE = 'D:\Documentos\Bot ciudadania\Scripts\keys.json'
+    SERVICE_ACCOUNT_FILE = '.\Scripts\keys.json'
     
     
     creds = None
@@ -52,12 +52,11 @@ def mailList():
     return mails
 
 
-def sendoMail(i, hour):
+def send_Mail(i, hour):
     
-    Sender_Email = rde(3) 
-    Password = rde(4) 
+    Sender_Email = read(3) 
+    Password = read(4) 
 
-    mails = ["gasparmjose@gmail.com", "carmenjose9.m@gmail.com", "carmelilita.jose@gmail.com", "julietasardella@outlook.com"]
     Reciever_Email = mailList()
     for mail in Reciever_Email:
         mails.append(mail)
@@ -84,12 +83,12 @@ Se encontro un turno en el intento {i}.
 
 ''') 
     
-        with open(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png', 'rb') as f:
-            image_data = f.read()
-            image_type = imghdr.what(f.name)
-            image_name = f.name
+        # with open(f'.\screenshots\screen_{i}.png', 'rb') as f:
+        #     image_data = f.read()
+        #     image_type = imghdr.what(f.name)
+        #     image_name = f.name
     
-        newMessage.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
+        # newMessage.add_attachment(image_data, maintype='image', subtype=image_type, filename=image_name)
     
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(Sender_Email, Password)              

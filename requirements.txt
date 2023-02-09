@@ -1,1 +1,6 @@
-selenium==4.2.0
+google_api_python_client==2.77.0
+numpy==1.24.2
+protobuf==4.21.12
+pyTelegramBotAPI==4.10.0
+pytesseract==0.3.10
+selenium==4.8.0

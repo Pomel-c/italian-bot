@@ -1,18 +1,18 @@
 from lib2to3.pgen2 import driver
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+
 import time
 import os
 from os import walk
-import pytesseract
 from datetime import datetime, date
-from selenium.webdriver.firefox.options import Options
 
-
-from sendo import sendoMail
-from var_sv import rde, wrt
-from mod_bot import tele
+from SendMail import send_Mail
+from WriteWriteInfo import read, write
+from TelegramBot import tele
 
 # ./venv/Scripts/activate.ps1   
 
@@ -21,20 +21,19 @@ options = Options()
 options.headless = True
 driver = webdriver.Firefox(options=options, executable_path=r'C:\Program Files (x86)\geckodriver.exe', service_log_path="D:\Documentos\Bot ciudadania\geckodriver.log")
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
+# Funcion Logear en la pagina del Prenota
 def login(): 
 
     # Obtengo mail y contrasela
-    mailR = rde(0)
-    passW = rde(1)
+    mailR = read(0)
+    passW = read(1)
     
     # Logeo
     mailBox = driver.find_element(By.ID,"login-email")    
     mailBox.send_keys(mailR)
     
-    
-
     passBox = driver.find_element(By.ID,"login-password")
     passBox.send_keys(passW)
     
@@ -43,6 +42,7 @@ def login():
 
     time.sleep(20)
 
+# Obtengo datos de hoy para escribir el Log file
 def dataHoy():
     ## hora
     now = datetime.now()
@@ -54,8 +54,12 @@ def dataHoy():
 
     return dia, hour
 
+
+# Verifico si encontre turnos
 def verf(i, hour, dia, intento):
+    # Verf1 es verificacion de palabras en HTML
     verf1 = False
+    # Verf2 es sacar screenshot a la pantalla y a traves de un OCR chequear si abri el formulario de turnos
     verf2 = False
 
     # Chequeo si estan las palabras en el html
@@ -72,25 +76,26 @@ def verf(i, hour, dia, intento):
 
 
     # Chequeo de seguridad, palabras escritas de la imagen
+    # Si instalan "pytesseract" un OCR descomenten estas lineas
     
-    text = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-    frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni', 'Servizio di rilascio passaporti', 'prenotando per 1 Appuntamento', 'Figli minorenni', 'Informazioni sulla prenotazione', 'Numero figli minorenni', 'Prenotazione Singola']
+    # text = pytesseract.image_to_string(f'.\screenshots\screen_{i}.png')
+    # frases = ['Dati Richiedente', 'Figii minorenni', 'Numero figii minorenni', 'Servizio di rilascio passaporti', 'prenotando per 1 Appuntamento', 'Figli minorenni', 'Informazioni sulla prenotazione', 'Numero figli minorenni', 'Prenotazione Singola']
 
-    check = 0
+    # check = 0
     
-    for frase in frases:    
-        if frase in text:
-            print(frase)
-            check += 1
+    # for frase in frases:    
+    #     if frase in text:
+    #         print(frase)
+    #         check += 1
         
-        if check == 3:
-            verf2 = True
-            break
+    #     if check == 3:
+    #         verf2 = True
+    #         break
 
-    if verf1 and verf2:
+    if verf1:  #and verf2:
         msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
         tele(i, hour)
-        sendoMail(i, hour)
+        send_Mail(i, hour)
         return msg
 
     else:
@@ -98,14 +103,14 @@ def verf(i, hour, dia, intento):
         return msg
 
     
-
+# Funcion Principal del bot
 def main():  
 
     # Obtengo datos iniciales y mensaje default
     intento = 0
     bandera = 0
     dia, hour = dataHoy()
-    i = int(rde("intento"))
+    i = int(read("intento"))
     msg = f'Problema de conexion {i} Hora: {hour} del {dia}'
 
 
@@ -153,7 +158,7 @@ def main():
                 if driver.current_url == 'https://prenotami.esteri.it/Services' or driver.current_url == 'https://prenotami.esteri.it/Services/Booking/1193':
                     url = driver.current_url
                     suma = 0
-                    i = int(rde("intento"))
+                    i = int(read("intento"))
 
                     prenota_error = 'Al momento non ci sono date disponibili per il servizio richiesto'
                     
@@ -161,10 +166,10 @@ def main():
                     while driver.current_url == 'https://prenotami.esteri.it/Services':
 
                         driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-                        texto = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+                        #texto = pytesseract.image_to_string(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
                         html = driver.page_source
 
-                        if prenota_error in texto or prenota_error in html:
+                        if prenota_error in html: #prenota_error in texto or :
                             break
 
                         else:
@@ -178,9 +183,9 @@ def main():
                                 break
                 
                     if url == 'https://prenotami.esteri.it/Services/Booking/552':
-                        driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
-                        #msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
-                        #sendoMail(i,hour)
+                        driver.get_screenshot_as_file(f'.\screenshots\screen_{i}.png')
+                        msg = f'Hay turnos,  intento {i} Hora: {hour} del {dia} en el intento: {intento}'
+                        send_Mail(i,hour)
                     
                     break
 
@@ -191,7 +196,7 @@ def main():
         intento += 1
         if intento == 10:
             bandera = 1
-            driver.get_screenshot_as_file(f'D:\Documentos\Bot ciudadania\screenshots\screen_{i}.png')
+            driver.get_screenshot_as_file(f'.\screenshots\screen_{i}.png')
             break
     
     # Escribo en el Log
@@ -202,7 +207,7 @@ def main():
         msg = f'Error de conexion, intento {i} Hora: {hour} del {dia}. Recursion: {intento}'
 
     i = i + 1
-    wrt(i, msg)
+    write(i, msg)
 
     driver.quit()
 
@@ -210,8 +215,8 @@ main()
 
 
 # Borro screens de mas de un dia 672 = 1 dia
-mypath = "D:\Documentos\Bot ciudadania\screenshots"
-items = next(walk(mypath), (None, None, []))[2]
-if len(items) >= 750:    
-    for item in items:
-        os.remove(f'D://Documentos//Bot ciudadania//screenshots//{item}')
+# mypath = ".\screenshots"
+# items = next(walk(mypath), (None, None, []))[2]
+# if len(items) >= 750:    
+#     for item in items:
+#         os.remove(f'.\screenshots\{item}')

@@ -1,7 +1,7 @@
 # ./venv/Scripts/Activate.ps1
 
 import telebot
-from var_sv import wrt_nuevo, rde_list, api, wrt_list
+from WriteWriteInfo import wrt_nuevo, rde_list, api, wrt_list
 
 API_KEY = api()
 bot = telebot.TeleBot(API_KEY)
@@ -11,7 +11,7 @@ bot = telebot.TeleBot(API_KEY)
 
 def tele(i, hour):
 
-	ids = open('D:\Documentos\Bot ciudadania\Textos\id_lista.txt', 'r')
+	ids = open('.\Textos\id_lista.txt', 'r')
 	reader = ids.readlines()
 	id_list = []
 	for line in reader:
@@ -19,7 +19,7 @@ def tele(i, hour):
 
 	for id in id_list:
 		bot .send_message(id,f'Hay turnos de consulado hora: {hour}')
-		photo = open(f"D://Documentos//Bot ciudadania//screenshots//screen_{i}.png", 'rb')
+		photo = open(f".\screenshots\screen_{i}.png", 'rb')
 		bot.send_photo(id, photo)
 
 def add_user():
