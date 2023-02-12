@@ -11,7 +11,7 @@ from os import walk
 from datetime import datetime, date
 
 from SendMail import send_Mail
-from WriteWriteInfo import read, write
+from ReadWriteInfo import read, write
 from TelegramBot import tele
 
 # ./venv/Scripts/activate.ps1   

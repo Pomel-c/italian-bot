@@ -1,7 +1,7 @@
 # ./venv/Scripts/Activate.ps1
 
 import telebot
-from WriteWriteInfo import wrt_nuevo, rde_list, api, wrt_list
+from ReadWriteInfo import wrt_nuevo, rde_list, api, wrt_list
 
 API_KEY = api()
 bot = telebot.TeleBot(API_KEY)

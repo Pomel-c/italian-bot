@@ -4,7 +4,7 @@ import imghdr
 from email.message import EmailMessage
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-from WriteWriteInfo import read
+from ReadWriteInfo import read
 import random
 import math
 import numpy as np
